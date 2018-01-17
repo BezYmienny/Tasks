@@ -13,13 +13,27 @@ namespace Tasks
             Task<int> t = Task.Run(() =>
             {
                 return 42;
-            }).ContinueWith((i) =>
-            {
-                return i.Result * 2;
             });
+            
+            
+            t.ContinueWith((i) =>
+            {
+                Console.WriteLine("Canceled");
+                
+            },TaskContinuationOptions.OnlyOnCanceled);
 
-            t.Wait();
-            Console.WriteLine(t.Result);
+            t.ContinueWith((i) =>
+           {
+               Console.WriteLine("Faulted");
+           }, TaskContinuationOptions.OnlyOnFaulted);
+
+        var completedTask =t.ContinueWith((i) =>
+      {
+          Console.WriteLine("Completed");
+      }, TaskContinuationOptions.OnlyOnRanToCompletion);
+        
+            completedTask.Wait();
+            Console.WriteLine("hokus pokus");
             Console.ReadKey();
         }
     }
