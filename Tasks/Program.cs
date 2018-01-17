@@ -13,10 +13,7 @@ namespace Tasks
             Task<int> t = Task.Run(() =>
            {
                return 42;
-           }).ContinueWith((i) =>
-          {
-              return i.Result * 2;
-          });
+           });
 
             t.Wait();
             Console.WriteLine(t.Result);
