@@ -12,12 +12,7 @@ namespace Tasks
         {
             Task<int> t = Task.Run(() =>
            {
-               for(int i=0;i<100;i++)
-               {
-                   Console.Write("*");
-               }
-               Console.WriteLine("!!!");
-               return 42;
+              return 42;
            });
 
             t.Wait();
