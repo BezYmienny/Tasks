@@ -10,17 +10,18 @@ namespace Tasks
     {
         static void Main(string[] args)
         {
-            Task t = Task.Run(() =>
+            Task<int> t = Task.Run(() =>
            {
                for(int i=0;i<100;i++)
                {
                    Console.Write("*");
                }
                Console.WriteLine("!!!");
+               return 42;
            });
 
             t.Wait();
-
+            Console.WriteLine(t.Result);
             Console.ReadKey();
         }
     }
