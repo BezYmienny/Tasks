@@ -14,29 +14,22 @@ namespace Tasks
             {
                 var results = new Int32[3];
 
-                new Task(() =>
-               {
-                   results[0] = 0;
-               },TaskCreationOptions.AttachedToParent).Start(); 
+                new Task(() => results[0] = 0,TaskCreationOptions.AttachedToParent).Start();
+                //Console.WriteLine(results[0]);
 
-                new Task(() =>
-                {
-                    results[1] = 1;
-                }, TaskCreationOptions.AttachedToParent).Start();
-
-                new Task(() =>
-                {
-                    results[2] = 2;
-                }, TaskCreationOptions.AttachedToParent).Start(); ;
-
-
+                new Task(() => results[1] = 1, TaskCreationOptions.AttachedToParent).Start();
+                //Console.WriteLine(results[1]);
+                new Task(() => results[2] = 2, TaskCreationOptions.AttachedToParent).Start();
+                //Console.WriteLine(results[2]);
                 return results;
             });
 
+           // Console.WriteLine(" results is {0} big",parent.Result);
 
-            var finalTask = parent.ContinueWith(parentTask =>
+            var finalTask = parent.ContinueWith(
+                parentTask =>
             {
-                foreach (int i in parentTask.Result)
+                foreach (int i in parent.Result)   ///Error in Chapter 1 page 13 -> there is parentTask - it isn't connected to parent ( task ) !!!
                     Console.WriteLine(i);
             });
 
