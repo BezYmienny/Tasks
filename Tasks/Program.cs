@@ -20,7 +20,8 @@ namespace Tasks
                 new Task(() => results[1] = 1, TaskCreationOptions.AttachedToParent).Start();
                 //Console.WriteLine(results[1]);
                 new Task(() => results[2] = 2, TaskCreationOptions.AttachedToParent).Start();
-                //Console.WriteLine(results[2]);
+
+                Console.WriteLine("Main Task");
                 return results;
             });
 
